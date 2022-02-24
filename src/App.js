@@ -36,7 +36,7 @@ const App = () => {
           <List places={places}/>
         </div>
         <div className="col-span-12 md:col-span-8">
-          <Map setCordinates={setCordinates} setBounds={setBounds} cordinates={cordinates}/>
+          <Map setCordinates={setCordinates} setBounds={setBounds} cordinates={cordinates} places={places}/>
         </div>
       </div>
     </>
