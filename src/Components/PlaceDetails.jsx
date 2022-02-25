@@ -3,11 +3,17 @@ import { AiFillPhone } from 'react-icons/ai'
 import { MdLocationPin } from 'react-icons/md'
 import ReactStars from "react-rating-stars-component";
 
-const PlaceDetails = ({ place }) => {
+const PlaceDetails = ({ place, selected, refProp }) => {
+  
+  if (selected) {
+    refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  
+
   return (
     <div className="card rounded overflow-hidden shadow-lg mb-3">
       <img
-        class="w-full"
+        className="w-full"
         src={
           place.photo
             ? place.photo.images.large.url
@@ -41,9 +47,9 @@ const PlaceDetails = ({ place }) => {
           ))}
         </div>
 
-        <div class="py-2">
+        <div className="py-2">
           {place?.cuisine?.map( ({name}) =>(
-              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">
               {name}
             </span>
           ))}
