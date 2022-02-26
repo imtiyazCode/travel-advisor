@@ -2,18 +2,19 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react';
 import { ImLocation2 } from 'react-icons/im';
 import ReactStars from "react-rating-stars-component";
+import { mapStyles } from '../style/mapStyles';
 
-const Map = ({ setBounds, setCordinates, cordinates, places, setChildClicked }) => {
+const Map = ({ setBounds, setCordinates, cordinates, places, setChildClicked, weather }) => {
 
   return (
     <div className="mapContainer w-full h-[85vh]">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyDuvYmAzQPERwiSZS05IzQ_9dgso__myGI" }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
         defaultCenter={cordinates}
         center={cordinates}
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
-        options={''}
+        options={{ disableDefaultUI: true, zoomControl: true, styles: mapStyles }}
         onChange={(e) => {
           setCordinates({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
@@ -45,9 +46,13 @@ const Map = ({ setBounds, setCordinates, cordinates, places, setChildClicked }) 
             </div>
 
           </div>
-        ))
+        ))}
 
-        }
+        {weather?.list?.length && weather.list.map((data, i) => (
+          <div key={i} lat={data.coord.lat} lng={data.coord.lon}>
+            <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} height="70px" />
+          </div>
+        ))}
       </GoogleMapReact >
     </div >
   )
