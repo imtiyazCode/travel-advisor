@@ -5,6 +5,12 @@ import Map from './Components/Map';
 import List from './Components/List';
 import { getPlacesData, getWheatherData } from './api/travelAdvisorAPI';
 
+const style = {
+  containerGrid: `grid grid-cols-12 w-[100%] h-full`,
+  listContainer: `col-span-12 md:col-span-4`,
+  mapContainer: `col-span-12 md:col-span-8`
+}
+
 const App = () => {
 
   const [type, setType] = useState("restaurants");
@@ -54,8 +60,8 @@ const App = () => {
   return (
     <>
       <Header setCordinates={setCordinates} />
-      <div className='grid grid-cols-12 w-[100%] h-full'>
-        <div className="col-span-12 md:col-span-4">
+      <div className={style.containerGrid}>
+        <div className={style.listContainer}>
           <List places={filteredPlaces?.length ? filteredPlaces : places}
             childClicked={childClicked}
             isLoading={isLoading}
@@ -64,7 +70,7 @@ const App = () => {
             rating={rating}
             setRating={setRating} />
         </div>
-        <div className="col-span-12 md:col-span-8">
+        <div className={style.mapContainer}>
           <Map setCordinates={setCordinates}
             setBounds={setBounds}
             cordinates={cordinates}
